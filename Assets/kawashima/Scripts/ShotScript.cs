@@ -1,12 +1,12 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class ShotScript : MonoBehaviour
 {
-    [Header("ƒAƒ^ƒbƒ`—“")]
+    [Header("ã‚¢ã‚¿ãƒƒãƒæ¬„")]
     [SerializeField] Rigidbody2D rb;
-    [Header("ƒXƒs[ƒh’²®")]
+    [Header("ã‚¹ãƒ”ãƒ¼ãƒ‰èª¿æ•´")]
     [SerializeField] float speed = 20.0f;
-    [Header("ƒfƒoƒbƒOŠm”F—p")]
+    [Header("ãƒ‡ãƒãƒƒã‚°ç¢ºèªç”¨")]
     [SerializeField] Vector2 direction = Vector2.zero;
     [SerializeField] float pow = 0;
 
@@ -20,4 +20,5 @@ public class ShotScript : MonoBehaviour
         direction = vec_;
         pow = pow_;
     }
+
 }
