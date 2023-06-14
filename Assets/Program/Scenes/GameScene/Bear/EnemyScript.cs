@@ -6,10 +6,17 @@ public class EnemyScript : MonoBehaviour
 {
     //キャッシュ
     RectTransform rect;
+    //マネージャーのインスタンス
+    EnemyManager manager;
 
     [SerializeField] Rigidbody2D rb;
     [SerializeField] Vector2 direction = Vector2.left;
     [SerializeField] float speed = 20.0f;
+
+    public void SetManager(EnemyManager manager_)
+    {
+        manager = manager_;
+    }
 
     void Start()
     {
@@ -19,5 +26,10 @@ public class EnemyScript : MonoBehaviour
     void Update()
     {
         rb.velocity = direction * speed;
+    }
+
+    void OnDestroy()
+    {
+        manager.EnemysList.Remove(this);
     }
 }
