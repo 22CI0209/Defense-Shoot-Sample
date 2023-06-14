@@ -1,11 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/*“G‚ğ¶¬‚·‚é*/
+/*æ•µã‚’ç”Ÿæˆã™ã‚‹*/
 public class EnemyManager : MonoBehaviour
 {
-    //ƒLƒƒƒbƒVƒ…
+    //ã‚­ãƒ£ãƒƒã‚·ãƒ¥
     RectTransform rect;
 
     [SerializeField] float spawnTime = 2.0f;
@@ -18,6 +18,7 @@ public class EnemyManager : MonoBehaviour
         StartCoroutine(Wait());
     }
 
+    //æ•µç”Ÿæˆ
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(spawnTime);
