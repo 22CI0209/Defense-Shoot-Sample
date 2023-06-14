@@ -7,6 +7,7 @@ TagManager:
   - Sound
   - Enemy
   - Bullet
+  - Castle
   layers:
   - Default
   - TransparentFX
