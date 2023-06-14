@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class ShotScript : MonoBehaviour
+public class Shot : MonoBehaviour
 {
     [Header("アタッチ欄")]
     [SerializeField] Rigidbody2D rb;
@@ -10,6 +12,8 @@ public class ShotScript : MonoBehaviour
     [SerializeField] Vector2 direction = Vector2.zero;
     [SerializeField] float pow = 0;
 
+    public GameObject explosionEffect; //爆発エフェクトのオブジェクト
+   
     void Update()
     {
         rb.velocity = direction * speed;
@@ -21,4 +25,13 @@ public class ShotScript : MonoBehaviour
         pow = pow_;
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        //Enemyと接触したら消滅
+        if (other.CompareTag("Enemy"))
+        {
+            Instantiate(explosionEffect);
+            Destroy(gameObject);
+        }
+    }
 }

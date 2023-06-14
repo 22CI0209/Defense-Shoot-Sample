@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -25,7 +25,7 @@ public class CastleManager : MonoBehaviour
         /*お社は常にどのオブジェクトより前に表示される
          *https://gametukurikata.com/ui/changethedisplayorder
         */
-        transform.SetAsLastSibling();
+        //transform.SetAsLastSibling();
 
         /*マウス左を長押ししていると弾の威力がアップ*/
         var delta = Time.deltaTime;
@@ -50,7 +50,7 @@ public class CastleManager : MonoBehaviour
 
             /*アンカーが左下のときのみ正常に動作する*/
             var go = Instantiate(amoPrefab, rect.position, Quaternion.identity, transform.parent);
-            var shot = go.GetComponent<ShotScript>();
+            var shot = go.GetComponent<Shot>();
             Vector2 msPos = Input.mousePosition;
             Vector2 direction = msPos - rect.anchoredPosition;
             shot.SetShot(direction.normalized, Pow_Charge);

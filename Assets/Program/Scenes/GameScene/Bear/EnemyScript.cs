@@ -1,10 +1,10 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    //ƒLƒƒƒbƒVƒ…
+    //ã‚­ãƒ£ãƒƒã‚·ãƒ¥
     RectTransform rect;
 
     [SerializeField] Rigidbody2D rb;
