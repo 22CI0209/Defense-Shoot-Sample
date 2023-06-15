@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4677924520065124459}
   - component: {fileID: 3453621021267387444}
   - component: {fileID: 2398486998535289807}
+  - component: {fileID: 5903109444539963850}
   m_Layer: 5
   m_Name: Bear
   m_TagString: Enemy
@@ -74,7 +75,7 @@ MonoBehaviour:
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -185,8 +186,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5b30d0a5babfd44d9403bb6ccdfd092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 10
-  Attack: 5
   rb: {fileID: -7458562875033166804}
+  animator: {fileID: 0}
+  state: 0
+  hp: 10
+  isHit: 0
   direction: {x: -1, y: 0}
   speed: 80
+--- !u!114 &5903109444539963850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482382034554876750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 15, y: 15}
+  m_UseGraphicAlpha: 1
