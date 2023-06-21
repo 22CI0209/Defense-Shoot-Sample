@@ -50,7 +50,7 @@ public class CastleManager : MonoBehaviour
 
             /*アンカーが左下のときのみ正常に動作する*/
             var go = Instantiate(amoPrefab, rect.position, Quaternion.identity, transform.parent);
-            var shot = go.GetComponent<Shot>();
+            var shot = go.GetComponent<ShotScript>();
             Vector2 msPos = Input.mousePosition;
             Vector2 direction = msPos - rect.anchoredPosition;
             shot.SetShot(direction.normalized, Pow_Charge);

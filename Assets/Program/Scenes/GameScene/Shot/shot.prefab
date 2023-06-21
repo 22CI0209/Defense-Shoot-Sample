@@ -13,8 +13,7 @@ GameObject:
   - component: {fileID: 6001434357069530075}
   - component: {fileID: 5144160620650922278}
   - component: {fileID: 7579050826381527004}
-  - component: {fileID: 5720395909441976517}
-  - component: {fileID: -3377084623309680154}
+  - component: {fileID: 8755662856820811263}
   m_Layer: 5
   m_Name: shot
   m_TagString: Bullet
@@ -142,7 +141,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 56
---- !u!114 &5720395909441976517
+--- !u!114 &8755662856820811263
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,23 +150,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7664776285347891187}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08675c9e1e6d12b4d879ed250d03d9b3, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ae0a32dee915954ea9497e6ee20c7a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  image: {fileID: 6001434357069530075}
   rb: {fileID: 5144160620650922278}
-  speed: 1500
+  particle: {fileID: 0}
+  explosion: {fileID: 8299941332895815864, guid: 713328e84dd22b543be9dae58f1787e7, type: 3}
+  speed: 500
   direction: {x: 0, y: 0}
   pow: 0
-  explosionEffect: {fileID: 8299941332895815864, guid: 713328e84dd22b543be9dae58f1787e7, type: 3}
---- !u!114 &-3377084623309680154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7664776285347891187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3de0eeb8e7866d4987fafd1910a6b4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
