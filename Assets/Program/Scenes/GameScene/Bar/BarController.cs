@@ -6,10 +6,11 @@ using UnityEngine.UI;
 public class BarController : MonoBehaviour
 {
     [SerializeField] Image Bar;
+    [SerializeField] float FA_First;    //開始時のfillAmount
 
     private void Start() 
     {
-        ChangeFillAmount(0.0f);
+        ChangeFillAmount(FA_First);
     }
 
     /*バーの表示量を変更*/

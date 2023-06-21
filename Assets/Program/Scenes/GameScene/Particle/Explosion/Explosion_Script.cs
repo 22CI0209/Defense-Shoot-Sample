@@ -20,7 +20,7 @@ public class Explosion_Script : MonoBehaviour
     {
         try
         {
-            SM.PlaySE(2,1.0f);
+            SM.PlaySE(1,1.0f);
         }
         catch(NullReferenceException e)
         {
