@@ -38,10 +38,7 @@ public class EnemyScript : MonoBehaviour
         hp -= damage_;
         if (hp <= 0)
         {
-            //死亡するときの何らかの処理～
-            Instantiate(effectPrefab, rect.position, Quaternion.identity, transform.parent);
-            manager.EnemysList.Remove(this);
-            Destroy(gameObject);
+            EnemyDestroy();
         }
         else
         {
@@ -54,7 +51,7 @@ public class EnemyScript : MonoBehaviour
 
     public void Attack()
     {
-        //アニメーションイベント中に呼び出される攻撃関数
+        //アニメーションイベント中に呼び出される攻撃関数～
         //castleInstance.Damage();
         attackSE.Play();
     }
@@ -109,9 +106,18 @@ public class EnemyScript : MonoBehaviour
                 break;
         }
     }
+    void EnemyDestroy()
+    {
+        //死亡するときの何らかの処理～
+        Instantiate(effectPrefab, rect.position, Quaternion.identity, transform.parent);
+        manager.EnemysList.Remove(this);
+        //ScoreManager.singleton.AddScore(1);
+        Destroy(gameObject);
+    }
 
     void Start()
     {
+        //初期化処理～
         rect = transform as RectTransform;
         state = State.Move;
         StateSet();
