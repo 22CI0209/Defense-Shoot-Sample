@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7579050826381527004}
   - component: {fileID: 4890182716267885224}
   m_Layer: 5
-  m_Name: Shot
+  m_Name: shot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 5144160620650922278}
+  particle: {fileID: 9059294366084090844, guid: c72ff3253c359e446b296c07f0cd63a5, type: 3}
   speed: 400
   direction: {x: 0, y: 0}
   pow: 0

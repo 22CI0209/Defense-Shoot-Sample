@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class ShotScript : MonoBehaviour
 {
     [Header("アタッチ欄")]
+    [SerializeField] Image image;
     [SerializeField] Rigidbody2D rb;
+    [SerializeField] ParticleSystem particle;
     [Header("スピード調整")]
     [SerializeField] float speed = 20.0f;
     [Header("デバッグ確認用")]
@@ -12,13 +15,33 @@ public class ShotScript : MonoBehaviour
 
     void Update()
     {
+        /*移動*/
         rb.velocity = direction * speed;
+        transform.Rotate(new Vector3(0,0,-0.6f));
     }
 
+    /*画面外に出たら消去*/
+    
+
+    /*弾のステータス設定
+     *他のスクリプトから呼び出して下さい*/
     public void SetShot(Vector2 vec_, float pow_)
     {
         direction = vec_;
         pow = pow_;
+        SetParticle(pow_);
     }
 
+    /*一定威力でパーティクル表示
+    TODO:パーティクルをCanvas上に表示する方法は?
+    */
+    void SetParticle(float pow_)
+    {
+        if(pow_ >= 100.0f)
+        {
+            ParticleSystem p = Instantiate(particle);
+            p.transform.SetParent(gameObject.transform);
+            p.transform.localPosition = Vector3.zero;
+        }
+    }
 }
