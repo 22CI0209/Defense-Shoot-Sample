@@ -50,10 +50,14 @@ public class ShotScript : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
+            var enemy = other.GetComponent<EnemyScript>();
+            //enemy.Damage(pow);
             Vector2 spawnPos = GetComponent<Transform>().position;
             GameObject exp = Instantiate(explosion, spawnPos / 500, Quaternion.identity, transform.parent);
             Debug.Log("スポーン位置：" + spawnPos);
             Destroy(gameObject);
         }
     }
+
+
 }
