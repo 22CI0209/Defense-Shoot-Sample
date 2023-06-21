@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -39,6 +39,10 @@ public class CastleManager : MonoBehaviour
     void Update()
     {
         delta = Time.deltaTime;
+        /*お社は常にどのオブジェクトより前に表示される
+         *https://gametukurikata.com/ui/changethedisplayorder
+        */
+        //transform.SetAsLastSibling();
 
         /*弾を発射*/
         SpawnShot();
