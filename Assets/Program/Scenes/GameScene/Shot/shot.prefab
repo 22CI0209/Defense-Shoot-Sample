@@ -16,11 +16,7 @@ GameObject:
   - component: {fileID: 8755662856820811263}
   m_Layer: 5
   m_Name: shot
-<<<<<<< HEAD
-  m_TagString: Untagged
-=======
   m_TagString: Bullet
->>>>>>> origin/22CI0201
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -159,13 +155,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 6001434357069530075}
   rb: {fileID: 5144160620650922278}
-<<<<<<< HEAD
-  particle: {fileID: 9059294366084090844, guid: c72ff3253c359e446b296c07f0cd63a5, type: 3}
-  speed: 400
-=======
   particle: {fileID: 0}
   explosion: {fileID: 8299941332895815864, guid: 713328e84dd22b543be9dae58f1787e7, type: 3}
   speed: 500
->>>>>>> origin/22CI0201
   direction: {x: 0, y: 0}
   pow: 0
