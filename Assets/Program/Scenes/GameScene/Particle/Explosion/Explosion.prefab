@@ -11,13 +11,8 @@ GameObject:
   - component: {fileID: 6498162976159893626}
   - component: {fileID: 1598898341283092298}
   - component: {fileID: 7071879385594689413}
-<<<<<<< HEAD
   - component: {fileID: 1781651734937181151}
-  - component: {fileID: -2407066251727934115}
-  m_Layer: 0
-=======
   m_Layer: 5
->>>>>>> origin/22CI0201
   m_Name: Explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
