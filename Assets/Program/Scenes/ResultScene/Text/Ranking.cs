@@ -1,18 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Ranking : MonoBehaviour
 {
     public static string[] ranking = { "　１位：", "　２位：", "　３位：", "　４位：", "　５位：", "　６位：", "　７位：", "　８位：", "　９位：", "１０位：" };
-    public static int[] rankingValue = new int[10];
+    public static int[] rankingValue = new int[10]; //スコアランキング用の配列
 
     // Start is called before the first frame update
     void Start()
     {
         GetRanking();
-
         SetRanking(ScoreManager.score);
     }
 
@@ -32,7 +30,7 @@ public class Ranking : MonoBehaviour
             //取得した値とRankingの値を比較して入れ替え
             if (_value > rankingValue[i])
             {
-                var change = rankingValue[i];
+                int change = rankingValue[i];
                 rankingValue[i] = _value;
                 _value = change;
             }

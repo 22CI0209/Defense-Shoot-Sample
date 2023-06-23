@@ -23,14 +23,6 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    // 削除時の処理
-    void OnDestroy()
-    {
-        // スコアを保存
-        PlayerPrefs.SetInt("SCORE", score);
-        PlayerPrefs.Save();
-    }
-
     //scoreを増加させる
     public void AddScore(int amount)
     {

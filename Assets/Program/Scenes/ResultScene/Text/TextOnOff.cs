@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class TextOnOff : MonoBehaviour
 {
-    [SerializeField] private Text _text; //点滅させる対象
+    [SerializeField] private Text _text1; //点滅させる対象
+    [SerializeField] private Text _text2; //点滅させる対象
     [SerializeField] private float cycle = 1; //点滅周期
 
     private double time;
@@ -18,6 +19,7 @@ public class TextOnOff : MonoBehaviour
         var repeatValue = Mathf.Repeat((float)time, cycle);
 
         //点滅させる
-        _text.enabled = repeatValue >= cycle * 0.5f;
+        _text1.enabled = repeatValue >= cycle * 0.5f;
+        _text2.enabled = repeatValue >= cycle * 0.5f;
     }
 }
