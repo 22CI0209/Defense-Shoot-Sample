@@ -8,6 +8,7 @@ public class ShotScript : MonoBehaviour
     [SerializeField] Rigidbody2D rb;
     [SerializeField] ParticleSystem particle;
     [SerializeField] GameObject explosion;
+    [SerializeField] Camera mainCamera;
 
     [Header("スピード調整")]
     [SerializeField] float speed = 20.0f;
@@ -52,12 +53,42 @@ public class ShotScript : MonoBehaviour
         {
             var enemy = other.GetComponent<EnemyScript>();
             //enemy.Damage(pow);
-            Vector2 spawnPos = GetComponent<Transform>().position;
-            GameObject exp = Instantiate(explosion, spawnPos / 500, Quaternion.identity, transform.parent);
-            Debug.Log("スポーン位置：" + spawnPos);
+            //Vector2 spawnPos = GetComponent<Transform>().position;
+
+            /*編集中*/
+            // 弾のローカル座標をワールド座標に変換
+            Vector3 bulletPosition = transform.position;
+
+            // カメラのワールド座標上での弾の位置を計算
+            Vector3 cameraPosition = mainCamera.transform.position;
+            Vector3 offset = new Vector3(bulletPosition.x, bulletPosition.y, cameraPosition.z);
+            Vector3 cameraBulletPosition = cameraPosition + offset;
+
+            // 爆発を生成
+            Instantiate(explosion, cameraBulletPosition, Quaternion.identity);
+
+            // 弾を削除
             Destroy(gameObject);
+            /*編集中*/
         }
     }
 
+    public Rect GetScreenRect(Graphic self)
+    {
+        var _corners = new Vector3[4];
+        self.rectTransform.GetWorldCorners(_corners);
+
+        if (self.canvas.renderMode != RenderMode.ScreenSpaceOverlay)
+        {
+            var cam = self.canvas.worldCamera;
+            _corners[0] = RectTransformUtility.WorldToScreenPoint(cam, _corners[0]);
+            _corners[2] = RectTransformUtility.WorldToScreenPoint(cam, _corners[2]);
+        }
+
+        return new Rect(_corners[0].x,
+                        _corners[0].y,
+                        _corners[2].x - _corners[0].x,
+                        _corners[2].y - _corners[0].y);
+    }
 
 }
