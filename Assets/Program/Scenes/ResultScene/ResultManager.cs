@@ -12,9 +12,10 @@ public class ResultManager : MonoBehaviour
     [SerializeField] private Text _text2;
     [SerializeField] private TextMeshProUGUI scorelabel;
     [SerializeField] private GameObject Ranking;
+    [SerializeField] private GameObject Result;
     [SerializeField] private Text Clicktext; //クリックテキスト
-    //[SerializeField] private AudioSource TextSound;
-    //[SerializeField] private AudioSource ClickSound;
+    [SerializeField] private AudioSource TextSound;
+    [SerializeField] private AudioSource ClickSound;
     private int ResultScore;
     private int timeCount = 1; //時間間隔
 
@@ -23,6 +24,7 @@ public class ResultManager : MonoBehaviour
         //Coroutineを開始する
         StartCoroutine(TextDisplay());
         Ranking.SetActive(false);
+        Result.SetActive(true);
     }
 
     private void Update()
@@ -35,15 +37,25 @@ public class ResultManager : MonoBehaviour
     {
         yield return new WaitForSeconds(timeCount);
         _text1.text = "あなたのスコアは";
-        //TextSound.Play();
+        TextSound.Play();
 
         yield return new WaitForSeconds(timeCount);
         ResultScore = ScoreManager.score;
         scorelabel.text = ResultScore.ToString();
-        //TextSound.Play();
+        TextSound.Play();
         _text2.text = "点！";
 
         yield return new WaitForSeconds(timeCount);
         Clicktext.text = "クリックでランキング画面へ";
+        RankingStart();
+    }
+
+    void RankingStart()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Result.SetActive(false);
+            Ranking.SetActive(true);
+        }
     }
 }

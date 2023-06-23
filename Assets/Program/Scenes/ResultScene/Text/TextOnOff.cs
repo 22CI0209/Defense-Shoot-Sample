@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TextOnOff : MonoBehaviour
 {
-    [SerializeField] private Renderer _text; //点滅させる対象
+    [SerializeField] private Text _text; //点滅させる対象
     [SerializeField] private float cycle = 1; //点滅周期
 
     private double time;
