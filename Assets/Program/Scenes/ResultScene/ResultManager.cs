@@ -55,7 +55,7 @@ public class ResultManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Result.SetActive(false); //Resultを非表示にする
-            Ranking.SetActive(true); //ランキングを表示する
+            Ranking.SetActive(true); //Rankingを表示する
             ClickSound.Play();
         }
     }

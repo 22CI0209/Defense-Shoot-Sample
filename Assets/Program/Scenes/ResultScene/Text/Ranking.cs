@@ -5,10 +5,8 @@ using UnityEngine.UI;
 
 public class Ranking : MonoBehaviour
 {
-    string[] ranking = { "１位", "２位", "３位", "４位", "５位", "６位", "７位", "８位", "９位", "１０位" };
-    int[] rankingValue = new int[10];
-
-    Text[] rankingText = new Text[10];
+    public static string[] ranking = { "　１位：", "　２位：", "　３位：", "　４位：", "　５位：", "　６位：", "　７位：", "　８位：", "　９位：", "１０位：" };
+    public static int[] rankingValue = new int[10];
 
     // Start is called before the first frame update
     void Start()
