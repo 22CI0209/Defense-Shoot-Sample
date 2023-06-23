@@ -4,12 +4,13 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class ResultManager : MonoBehaviour
 {
     [SerializeField] private Text _text1;
     [SerializeField] private Text _text2;
-    [SerializeField] private Text scorelabel;
+    [SerializeField] private TextMeshProUGUI scorelabel;
     [SerializeField] private GameObject Ranking;
     [SerializeField] private Text Clicktext; //クリックテキスト
     //[SerializeField] private AudioSource TextSound;
@@ -33,7 +34,7 @@ public class ResultManager : MonoBehaviour
     private IEnumerator TextDisplay()
     {
         yield return new WaitForSeconds(timeCount);
-        _text1.text = "あなたの獲得したスコアは";
+        _text1.text = "あなたのスコアは";
         //TextSound.Play();
 
         yield return new WaitForSeconds(timeCount);
