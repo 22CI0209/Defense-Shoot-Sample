@@ -8,14 +8,14 @@ using TMPro;
 
 public class ResultManager : MonoBehaviour
 {
-    [SerializeField] private Text _text1;
-    [SerializeField] private Text _text2;
-    [SerializeField] private TextMeshProUGUI scorelabel;
+    [SerializeField] private Text _text1; //「あなたのスコアは」
+    [SerializeField] private Text _text2; //点！
+    [SerializeField] private TextMeshProUGUI scorelabel; //スコア表示用
     [SerializeField] private GameObject Ranking;
     [SerializeField] private GameObject Result;
-    [SerializeField] private Text Clicktext; //クリックテキスト
-    [SerializeField] private AudioSource TextSound;
-    [SerializeField] private AudioSource ClickSound;
+    [SerializeField] private Text Clicktext; //「左クリックでランキング画面へ」
+    [SerializeField] private AudioSource TextSound; //テキストを表示する時の効果音
+    [SerializeField] private AudioSource ClickSound; //マウスをクリックした時の音
     private int ResultScore;
     private int timeCount = 1; //時間間隔
 
@@ -23,13 +23,12 @@ public class ResultManager : MonoBehaviour
     {
         //Coroutineを開始する
         StartCoroutine(TextDisplay());
-        Ranking.SetActive(false);
-        Result.SetActive(true);
+        Ranking.SetActive(false); //最初はランキングを非表示にする
     }
 
     private void Update()
     {
-
+        RankingStart();
     }
 
     //リザルトテキスト表示のコルーチン
@@ -46,16 +45,18 @@ public class ResultManager : MonoBehaviour
         _text2.text = "点！";
 
         yield return new WaitForSeconds(timeCount);
-        Clicktext.text = "クリックでランキング画面へ";
-        RankingStart();
+        Clicktext.text = "左クリックでランキング画面へ";
     }
 
+    //ランキング表示をスタートする
     void RankingStart()
     {
+        //左クリックが押されたとき
         if (Input.GetMouseButtonDown(0))
         {
-            Result.SetActive(false);
-            Ranking.SetActive(true);
+            Result.SetActive(false); //Resultを非表示にする
+            Ranking.SetActive(true); //ランキングを表示する
+            ClickSound.Play();
         }
     }
 }
