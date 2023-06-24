@@ -5,12 +5,15 @@ using UnityEngine.UI;
 
 public class TextOnOff : MonoBehaviour
 {
-    [SerializeField] private Text _text1; //点滅させる対象
-    [SerializeField] private Text _text2; //点滅させる対象
+     private Text _text; //点滅させる対象
     [SerializeField] private float cycle = 1; //点滅周期
 
     private double time;
 
+    private void Start()
+    {
+        _text = this.gameObject.GetComponent<Text>();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -19,7 +22,6 @@ public class TextOnOff : MonoBehaviour
         var repeatValue = Mathf.Repeat((float)time, cycle);
 
         //点滅させる
-        _text1.enabled = repeatValue >= cycle * 0.5f;
-        _text2.enabled = repeatValue >= cycle * 0.5f;
+        _text.enabled = repeatValue >= cycle * 0.5f;
     }
 }

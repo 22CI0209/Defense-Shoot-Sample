@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Ranking : MonoBehaviour
 {
@@ -19,10 +20,11 @@ public class Ranking : MonoBehaviour
         //ランキング呼び出し
         for (int i = 0; i < ranking.Length; i++)
         {
-            rankingValue[i] = PlayerPrefs.GetInt("SCORE", 0);
+            rankingValue[i] = PlayerPrefs.GetInt(ranking[i]);
         }
     }
 
+    //ランキングに書き込み用
     void SetRanking(int _value)
     {
         for (int i = 0; i < ranking.Length; i++)
@@ -35,6 +37,12 @@ public class Ranking : MonoBehaviour
                 _value = change;
             }
         }
+
+        // 配列を昇順で並び替える
+        Array.Sort(rankingValue);
+        // 配列の順序を反転させる(降順)
+        Array.Reverse(rankingValue);
+
 
         //入れ替えた値を保存
         for (int i = 0; i < ranking.Length; i++)

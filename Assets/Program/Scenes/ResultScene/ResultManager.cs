@@ -22,6 +22,8 @@ public class ResultManager : MonoBehaviour
     private bool flag1;
     [SerializeField] Text _text;
     [SerializeField] Text[] _rankingScore;
+    [SerializeField] Text[] _PrerankingScore; //前回のランキング
+    private float cycle = 1; //点滅周期
     [SerializeField] AudioSource RankingSound;
     [SerializeField] private Text TitleClicktext; //「左クリックでタイトル画面へ」
 
@@ -31,10 +33,8 @@ public class ResultManager : MonoBehaviour
         StartCoroutine(TextDisplay());
         RankingObject.SetActive(false); //最初はランキングを非表示にする
         flag1 = false;
-    }
 
-    private void Update()
-    {
+        _PrerankingScore = _rankingScore; //前回のランキングを保存しておく
     }
 
     //リザルトテキスト表示のコルーチン
@@ -74,15 +74,11 @@ public class ResultManager : MonoBehaviour
     //ランキング表示をスタートする
     private IEnumerator RankingStart()
     {
-        //左クリックが押されたとき
-        if (Input.GetMouseButtonDown(0))
-        {
-            ClickSound.Play();
-            //ClickSoundが鳴り終わる前に遷移するのを防ぐ
-            yield return new WaitForSeconds(0.5f);
-            flag1 = true;
-            Debug.Log("マウスクリック");
-        }
+        ClickSound.Play();
+        //ClickSoundが鳴り終わる前に遷移するのを防ぐ
+        yield return new WaitForSeconds(0.5f);
+        flag1 = true;
+
     }
 
     //ランキング表示のコルーチン
@@ -96,6 +92,11 @@ public class ResultManager : MonoBehaviour
         for (int i = 0; i < Ranking.ranking.Length; ++i)
         {
             _rankingScore[i].text = Ranking.ranking[i] + Ranking.rankingValue[i].ToString();
+
+            if (_PrerankingScore[i] != _rankingScore[i])
+            {
+                yield return Blink(_rankingScore[i]); //点滅させる
+            }
         }
         RankingSound.Play();
 
@@ -106,23 +107,32 @@ public class ResultManager : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 yield return TitleSceneGo();
-                Debug.Log("マウスクリック");
+                break;
             }
             else
                 yield return null;
         }
     }
 
+    // 点滅コルーチン
+    private IEnumerator Blink(Text text)
+    {
+        while (true)
+        {
+            text.enabled = false;
+            yield return new WaitForSeconds(cycle);
+            text.enabled = true;
+        }
+    }
+
     //タイトルシーン遷移
     private IEnumerator TitleSceneGo()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            ClickSound.Play();
-            //ClickSoundが鳴り終わる前に遷移するのを防ぐ
-            yield return new WaitForSeconds(0.5f);
-            GlobalMember.ChangeScene(GlobalMember.NextSceneState.TitleScene);
-            Debug.Log("マウスクリック");
-        }
+        ClickSound.Play();
+        //ClickSoundが鳴り終わる前に遷移するのを防ぐ
+        yield return new WaitForSeconds(0.5f);
+        GlobalMember.ChangeScene(GlobalMember.NextSceneState.TitleScene);
     }
+
+
 }

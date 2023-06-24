@@ -276,11 +276,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 50
+    m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 50
+    m_MaxSize: 60
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -1339,6 +1339,7 @@ GameObject:
   - component: {fileID: 754642422}
   - component: {fileID: 754642424}
   - component: {fileID: 754642423}
+  - component: {fileID: 754642425}
   m_Layer: 5
   m_Name: Click Recommendation
   m_TagString: Untagged
@@ -1408,6 +1409,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 754642421}
   m_CullTransparentMesh: 1
+--- !u!114 &754642425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754642421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d8c381747693674a8fd77f436c0baff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cycle: 1
 --- !u!1 &906114840
 GameObject:
   m_ObjectHideFlags: 0
@@ -1776,6 +1790,7 @@ GameObject:
   - component: {fileID: 1210021110}
   - component: {fileID: 1210021111}
   - component: {fileID: 1210021112}
+  - component: {fileID: 1210021113}
   m_Layer: 5
   m_Name: Click Recommendation
   m_TagString: Untagged
@@ -1800,7 +1815,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -350, y: 20}
+  m_AnchoredPosition: {x: -310, y: 20}
   m_SizeDelta: {x: 700, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1210021111
@@ -1845,6 +1860,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
+--- !u!114 &1210021113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210021109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d8c381747693674a8fd77f436c0baff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cycle: 1
 --- !u!1 &1220374806
 GameObject:
   m_ObjectHideFlags: 0
@@ -2638,7 +2666,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2135609239}
-  - component: {fileID: 2135609241}
   - component: {fileID: 2135609242}
   m_Layer: 0
   m_Name: ResultSceneManager
@@ -2662,21 +2689,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2135609241
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2135609238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d8c381747693674a8fd77f436c0baff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _text1: {fileID: 754642423}
-  _text2: {fileID: 1210021112}
-  cycle: 1
 --- !u!114 &2135609242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2709,5 +2721,6 @@ MonoBehaviour:
   - {fileID: 1963268962}
   - {fileID: 2001523560}
   - {fileID: 268952871}
+  _PrerankingScore: []
   RankingSound: {fileID: 604143312}
   TitleClicktext: {fileID: 1210021112}
