@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class TitleManager : MonoBehaviour
 {
+    [SerializeField] SoundManager sound;
+
     private void Start() 
     {
         GlobalMember.ResetProgress();
@@ -14,6 +17,8 @@ public class TitleManager : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
+            sound.PlaySE(2,1.0f);
+            Thread.Sleep(500);
             GlobalMember.ChangeScene(GlobalMember.NextSceneState.GameScene);
         }
     }

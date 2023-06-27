@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -11,6 +11,7 @@ public class CastleManager : MonoBehaviour
 
     [Header("アタッチ欄")]
     [SerializeField] Image         image;               //画像
+    [SerializeField] SoundManager  sound;               //効果音
     [SerializeField] GameObject    amoPrefab;           //弾
     [SerializeField] GameObject    explosion;           //爆発
     [SerializeField] GameObject    pow_Bar;             //チャージ進捗
@@ -61,12 +62,6 @@ public class CastleManager : MonoBehaviour
         {
             image.color = new Color(1,1,1,1);
         }
-
-        //デバッグ
-        if(Input.GetMouseButtonDown(1))
-        {
-            Damage();
-        }
     }
 
     void SpawnShot()
@@ -98,7 +93,8 @@ public class CastleManager : MonoBehaviour
             var shot = go.GetComponent<ShotScript>();
             Vector2 msPos = Input.mousePosition;
             Vector2 direction = msPos - rect.anchoredPosition;
-            shot.SetShot(direction.normalized, Pow_Charge);
+            shot.SetShot(direction.normalized, (int)Pow_Charge);
+            sound.PlaySE(0,1.0f);
 
             /*リセット*/
             Pow_Charge = 0;
@@ -112,8 +108,7 @@ public class CastleManager : MonoBehaviour
         if(inv_Now <= 0)
         {
             hit--;
-            GameObject e = Instantiate(explosion);
-            e.transform.position = new Vector3(-4,-1);
+            GameObject e = Instantiate(explosion,rect.position,Quaternion.identity,transform.parent);
             e.transform.localScale = new Vector3(4,4,1);
 
             /*死亡ジャッジ*/
