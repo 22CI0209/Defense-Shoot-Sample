@@ -51,8 +51,11 @@ public class EnemyScript : MonoBehaviour
     public void Attack()
     {
         //アニメーションイベント中に呼び出される攻撃関数～
-        castleInstance.Damage();
-        attackSE.Play();
+        if(castleInstance != null)
+        {
+            castleInstance.Damage();
+            attackSE.Play();
+        }
     }
     public void FinishStan()
     {

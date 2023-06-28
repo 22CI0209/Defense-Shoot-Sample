@@ -67,7 +67,7 @@ public class CastleManager : MonoBehaviour
     void SpawnShot()
     {
         /*マウス左を長押ししていると弾の威力がアップ*/
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(2))
         {
             /*チャージ制限*/
             if(pow_ChargeTime < pow_ChargeTimeMax)
@@ -81,7 +81,7 @@ public class CastleManager : MonoBehaviour
             }
         }
         /*チャージ放出*/
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(2))
         {
             /*威力の最低保証*/
             if (Pow_Charge < pow_1Sec)
