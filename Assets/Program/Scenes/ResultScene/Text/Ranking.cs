@@ -7,7 +7,6 @@ public class Ranking : MonoBehaviour
 {
     public static string[] ranking = { "　１位：", "　２位：", "　３位：", "　４位：", "　５位：", "　６位：", "　７位：", "　８位：", "　９位：", "１０位："};
     public static int[] rankingValue = new int[10]; //スコアランキング用の配列
-    //public static int[] rankingValue = new int[] { 40, 32, 31, 29, 28, 25, 21, 15, 10, 5};
     public static int? _changePoint = null;
 
     // Start is called before the first frame update
@@ -20,9 +19,6 @@ public class Ranking : MonoBehaviour
 
     void GetRanking()
     {
-        int n = 0;
-        n++;
-        Debug.Log(n);
         //ランキング呼び出し
         for (int i = 0; i < ranking.Length; i++)
         {
@@ -35,11 +31,9 @@ public class Ranking : MonoBehaviour
     {
         for (int i = 0; i < ranking.Length; i++)
         {
-            //Debug.Log(i);
             //取得した値とRankingの値を比較して入れ替え
             if (_value > rankingValue[i])
             {
-                
                 //rankingValue[i]から後ろを一つずらす
                 for (int j = ranking.Length - 1; j > i; --j)
                 {

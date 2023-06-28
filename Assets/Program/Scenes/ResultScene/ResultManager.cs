@@ -20,19 +20,21 @@ public class ResultManager : MonoBehaviour
     private int timeCount = 1; //時間間隔
 
     //以下ランキング画面用
-    private bool flag1;
+    private bool flag1,flag2;
     [SerializeField] Text _text;
     [SerializeField] Text[] _rankingScore;
     private float cycle = 0.5f; //点滅周期
     [SerializeField] AudioSource RankingSound;
-    [SerializeField] private Text TitleClicktext; //「左クリックでタイトル画面へ」
+    [SerializeField] private int TitleCount; //TitleCount後にタイトルシーンに移行する
 
     private void Start()
     {
         //Coroutineを開始する
         StartCoroutine(TextDisplay());
+        StartCoroutine(TitleSceneGo());
         RankingObject.SetActive(false); //最初はランキングを非表示にする
         flag1 = false;
+        flag2 = false;
     }
 
     //リザルトテキスト表示のコルーチン
@@ -92,28 +94,23 @@ public class ResultManager : MonoBehaviour
         {
             _rankingScore[i].text = Ranking.ranking[i] + Ranking.rankingValue[i].ToString();
         }
-        yield return new WaitForSeconds(timeCount);
-        TitleClicktext.text = "左クリックでタイトル画面へ";
+        flag2 = true;
+        yield return Blink();
+    }
+    private IEnumerator Blink()
+    {
         while (true)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Ranking._changePoint == null)
             {
-                yield return TitleSceneGo();
-                break;
+                break; //ランキングが更新されなかった場合は何も行わない
             }
             else
             {
-                if (Ranking._changePoint == null)
-                {
-                    yield return null; //ランキングが更新されなかった場合は何も行わない
-                }
-                else
-                {
-                    _rankingScore[(int)Ranking._changePoint].enabled = true;
-                    yield return new WaitForSeconds(cycle);
-                    _rankingScore[(int)Ranking._changePoint].enabled = false;
-                    yield return new WaitForSeconds(cycle);
-                }
+                _rankingScore[(int)Ranking._changePoint].enabled = false;
+                yield return new WaitForSeconds(cycle);
+                _rankingScore[(int)Ranking._changePoint].enabled = true;
+                yield return new WaitForSeconds(cycle);
             }
         }
     }
@@ -121,9 +118,9 @@ public class ResultManager : MonoBehaviour
     //タイトルシーン遷移
     private IEnumerator TitleSceneGo()
     {
-        ClickSound.Play();
-        //ClickSoundが鳴り終わる前に遷移するのを防ぐ
-        yield return new WaitForSeconds(0.5f);
+        // flag2がtrueになるまで中断  
+        while (flag2 == false) yield return null;
+        yield return new WaitForSeconds(TitleCount);
         GlobalMember.ChangeScene(GlobalMember.NextSceneState.TitleScene);
     }
 }
