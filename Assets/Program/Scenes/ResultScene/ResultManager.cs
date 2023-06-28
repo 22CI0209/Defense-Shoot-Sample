@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class ResultManager : MonoBehaviour
 {
@@ -22,8 +23,7 @@ public class ResultManager : MonoBehaviour
     private bool flag1;
     [SerializeField] Text _text;
     [SerializeField] Text[] _rankingScore;
-    [SerializeField] Text[] _PrerankingScore; //前回のランキング
-    private float cycle = 1; //点滅周期
+    private float cycle = 0.5f; //点滅周期
     [SerializeField] AudioSource RankingSound;
     [SerializeField] private Text TitleClicktext; //「左クリックでタイトル画面へ」
 
@@ -33,8 +33,6 @@ public class ResultManager : MonoBehaviour
         StartCoroutine(TextDisplay());
         RankingObject.SetActive(false); //最初はランキングを非表示にする
         flag1 = false;
-
-        _PrerankingScore = _rankingScore; //前回のランキングを保存しておく
     }
 
     //リザルトテキスト表示のコルーチン
@@ -89,20 +87,14 @@ public class ResultManager : MonoBehaviour
         RankingSound.Play();
 
         yield return new WaitForSeconds(timeCount);
+        RankingSound.Play();
         for (int i = 0; i < Ranking.ranking.Length; ++i)
         {
             _rankingScore[i].text = Ranking.ranking[i] + Ranking.rankingValue[i].ToString();
-
-            if (_PrerankingScore[i] != _rankingScore[i])
-            {
-                yield return Blink(_rankingScore[i]); //点滅させる
-            }
         }
-        RankingSound.Play();
-
         yield return new WaitForSeconds(timeCount);
         TitleClicktext.text = "左クリックでタイトル画面へ";
-        while(true)
+        while (true)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -110,18 +102,19 @@ public class ResultManager : MonoBehaviour
                 break;
             }
             else
-                yield return null;
-        }
-    }
-
-    // 点滅コルーチン
-    private IEnumerator Blink(Text text)
-    {
-        while (true)
-        {
-            text.enabled = false;
-            yield return new WaitForSeconds(cycle);
-            text.enabled = true;
+            {
+                if (Ranking._changePoint == null)
+                {
+                    yield return null; //ランキングが更新されなかった場合は何も行わない
+                }
+                else
+                {
+                    _rankingScore[(int)Ranking._changePoint].enabled = true;
+                    yield return new WaitForSeconds(cycle);
+                    _rankingScore[(int)Ranking._changePoint].enabled = false;
+                    yield return new WaitForSeconds(cycle);
+                }
+            }
         }
     }
 
@@ -133,6 +126,4 @@ public class ResultManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         GlobalMember.ChangeScene(GlobalMember.NextSceneState.TitleScene);
     }
-
-
 }
