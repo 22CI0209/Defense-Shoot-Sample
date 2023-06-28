@@ -49,28 +49,7 @@ public class ShotScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
-        {
-            var enemy = other.GetComponent<EnemyScript>();
-            //enemy.Damage(pow);
-            //Vector2 spawnPos = GetComponent<Transform>().position;
-
-            /*編集中*/
-            // 弾のローカル座標をワールド座標に変換
-            Vector3 bulletPosition = transform.position;
-
-            // カメラのワールド座標上での弾の位置を計算
-            Vector3 cameraPosition = mainCamera.transform.position;
-            Vector3 offset = new Vector3(bulletPosition.x, bulletPosition.y, cameraPosition.z);
-            Vector3 cameraBulletPosition = cameraPosition + offset;
-
-            // 爆発を生成
-            Instantiate(explosion, cameraBulletPosition, Quaternion.identity);
-
-            // 弾を削除
-            Destroy(gameObject);
-            /*編集中*/
-        }
+        
     }
 
     public Rect GetScreenRect(Graphic self)
