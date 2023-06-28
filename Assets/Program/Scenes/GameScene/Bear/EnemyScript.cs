@@ -1,5 +1,6 @@
-﻿﻿using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
+using System.Threading.Tasks;
 
 /// <summary>
 /// 敵の行動を処理するクラス
@@ -25,7 +26,7 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] CastleManager castleInstance;
     [Header("移動関係")]
     [SerializeField] Vector2 direction = Vector2.left;
-    [SerializeField] float speed = 100.0f;
+    [SerializeField] float speed = 20.0f;
 
     public void SetManager(EnemyManager manager_)
     {

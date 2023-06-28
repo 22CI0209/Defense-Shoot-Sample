@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ShotScript : MonoBehaviour
@@ -7,8 +7,6 @@ public class ShotScript : MonoBehaviour
     [SerializeField] Image image;
     [SerializeField] Rigidbody2D rb;
     [SerializeField] ParticleSystem particle;
-    [SerializeField] GameObject explosion;
-
     [Header("スピード調整")]
     [SerializeField] float speed = 20.0f;
     [Header("デバッグ確認用")]
@@ -23,9 +21,10 @@ public class ShotScript : MonoBehaviour
     }
 
     /*画面外に出たら消去*/
+    
 
     /*弾のステータス設定
-    *他のスクリプトから呼び出して下さい*/
+     *他のスクリプトから呼び出して下さい*/
     public void SetShot(Vector2 vec_, float pow_)
     {
         direction = vec_;
@@ -45,19 +44,4 @@ public class ShotScript : MonoBehaviour
             p.transform.localPosition = Vector3.zero;
         }
     }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            var enemy = other.GetComponent<EnemyScript>();
-            //enemy.Damage(pow);
-            Vector2 spawnPos = GetComponent<Transform>().position;
-            GameObject exp = Instantiate(explosion, spawnPos / 500, Quaternion.identity, transform.parent);
-            Debug.Log("スポーン位置：" + spawnPos);
-            Destroy(gameObject);
-        }
-    }
-
-
 }
