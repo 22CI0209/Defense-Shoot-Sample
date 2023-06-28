@@ -20,7 +20,7 @@ public class EnemyScript : MonoBehaviour
 
     [Header("ステータス")]
     [SerializeField] State state = State.Move;
-    [SerializeField] float hp = 10.0f;
+    [SerializeField] int hp = 10;
     [SerializeField] bool isHit = false;
     [SerializeField] CastleManager castleInstance;
     [Header("移動関係")]
@@ -31,7 +31,7 @@ public class EnemyScript : MonoBehaviour
     {
         manager = manager_;
     }
-    public void Damage(float damage_)
+    public void Damage(int damage_)
     {
         //攻撃を食らった時の何らかの処理～
         hp -= damage_;
@@ -44,15 +44,18 @@ public class EnemyScript : MonoBehaviour
             //被弾したときの処理～
             state = State.Damage;
             StateSet();
-            hpText.text = hp.ToString();
+            hpText.text = hp.ToString("F0");
         }
     }
 
     public void Attack()
     {
         //アニメーションイベント中に呼び出される攻撃関数～
-        //castleInstance.Damage();
-        attackSE.Play();
+        if(castleInstance != null)
+        {
+            castleInstance.Damage();
+            attackSE.Play();
+        }
     }
     public void FinishStan()
     {
@@ -120,7 +123,7 @@ public class EnemyScript : MonoBehaviour
         rect = transform as RectTransform;
         state = State.Move;
         StateSet();
-        hpText.text = hp.ToString();
+        hpText.text = hp.ToString("F0");
     }
 
     void Update()

@@ -155,8 +155,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 6001434357069530075}
   rb: {fileID: 5144160620650922278}
-  particle: {fileID: 0}
+  particle: {fileID: 6425567353287110060, guid: c72ff3253c359e446b296c07f0cd63a5, type: 3}
   explosion: {fileID: 8299941332895815864, guid: 713328e84dd22b543be9dae58f1787e7, type: 3}
-  speed: 500
+  speed: 10
   direction: {x: 0, y: 0}
   pow: 0
