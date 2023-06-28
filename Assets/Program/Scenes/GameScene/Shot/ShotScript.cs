@@ -6,68 +6,70 @@ public class ShotScript : MonoBehaviour
     [Header("アタッチ欄")]
     [SerializeField] Image image;
     [SerializeField] Rigidbody2D rb;
-    [SerializeField] ParticleSystem particle;
+    [SerializeField] GameObject particle;
     [SerializeField] GameObject explosion;
-    [SerializeField] Camera mainCamera;
 
     [Header("スピード調整")]
     [SerializeField] float speed = 20.0f;
     [Header("デバッグ確認用")]
     [SerializeField] Vector2 direction = Vector2.zero;
-    [SerializeField] float pow = 0;
+    [SerializeField] int pow = 0;
+
+    RectTransform rect;
+
+    private void Awake() 
+    {
+        rect = transform as RectTransform;
+    }
 
     void Update()
     {
         /*移動*/
         rb.velocity = direction * speed;
-        transform.Rotate(new Vector3(0,0,-0.6f));
+        transform.Rotate(new Vector3(0,0,-1.2f));
+        OutOfCamera();
     }
 
     /*画面外に出たら消去*/
+    void OutOfCamera()
+    {
+        if(transform.position.x > 12)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     /*弾のステータス設定
     *他のスクリプトから呼び出して下さい*/
-    public void SetShot(Vector2 vec_, float pow_)
+    public void SetShot(Vector2 vec_, int pow_)
     {
         direction = vec_;
         pow = pow_;
         SetParticle(pow_);
     }
 
-    /*一定威力でパーティクル表示
-    TODO:パーティクルをCanvas上に表示する方法は?
-    */
+    /*一定威力でパーティクル表示*/
     void SetParticle(float pow_)
     {
-        if(pow_ >= 100.0f)
+        if(pow_ >= 3)
         {
-            ParticleSystem p = Instantiate(particle);
-            p.transform.SetParent(gameObject.transform);
-            p.transform.localPosition = Vector3.zero;
+            GameObject p = Instantiate(particle,rect.position,Quaternion.identity,gameObject.transform);
         }
     }
 
+    /*敵にダメージを与えて自分は消滅*/
     private void OnTriggerEnter2D(Collider2D other)
     {
-        
-    }
-
-    public Rect GetScreenRect(Graphic self)
-    {
-        var _corners = new Vector3[4];
-        self.rectTransform.GetWorldCorners(_corners);
-
-        if (self.canvas.renderMode != RenderMode.ScreenSpaceOverlay)
+        if (other.CompareTag("Enemy"))
         {
-            var cam = self.canvas.worldCamera;
-            _corners[0] = RectTransformUtility.WorldToScreenPoint(cam, _corners[0]);
-            _corners[2] = RectTransformUtility.WorldToScreenPoint(cam, _corners[2]);
+            var enemy = other.GetComponent<EnemyScript>();
+            enemy.Damage(pow);
+            Vector2 spawnPos = GetComponent<Transform>().position;
+            GameObject exp = Instantiate(explosion, rect.position, Quaternion.identity, transform.parent);
+            Debug.Log("スポーン位置：" + spawnPos);
+            Destroy(gameObject);
         }
-
-        return new Rect(_corners[0].x,
-                        _corners[0].y,
-                        _corners[2].x - _corners[0].x,
-                        _corners[2].y - _corners[0].y);
     }
+
 
 }

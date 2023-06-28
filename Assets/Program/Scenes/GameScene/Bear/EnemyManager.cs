@@ -31,26 +31,34 @@ public class EnemyManager : MonoBehaviour
         {
             //spawnTime秒待つ
             yield return new WaitForSeconds(spawnTime);
+
             //スポーンエリアをランダムに決める
-            //例 x 1920 y 150 w 100 h 500 の場合
-            //左下を(0, 0)として右上を(1920, 1080)とするので
-            //x軸 1920 ~ 2020 の範囲＋エネミーの横幅分オフセットが働くため
-            //実際は敵のwidthとheight分ずれて生成される
-            //例としてエネミーのwidth heightが(224, 224)の場合
-            //x軸 2144 ~ 2244の範囲に生成
-            //yも同様に下からy ~ yからの距離 height の間に生成+エネミーのオフセットが働く
-            float x = Random.Range(spawnArea.x + enemyRect.sizeDelta.x * enemyRect.localScale.x,
-                spawnArea.x + enemyRect.sizeDelta.x * enemyRect.localScale.x + spawnArea.width),
-                y = Random.Range(spawnArea.y + enemyRect.sizeDelta.y * enemyRect.localScale.y,
-                spawnArea.y + enemyRect.sizeDelta.y * enemyRect.localScale.y + spawnArea.height);
+            //以下は旧処理
+            {
+                //例 x 1920 y 150 w 100 h 500 の場合
+                //左下を(0, 0)として右上を(1920, 1080)とするので
+                //x軸 1920 ~ 2020 の範囲＋エネミーの横幅分オフセットが働くため
+                //実際は敵のwidthとheight分ずれて生成される
+                //例としてエネミーのwidth heightが(224, 224)の場合
+                //x軸 2144 ~ 2244の範囲に生成
+                //yも同様に下からy ~ yからの距離 height の間に生成+エネミーのオフセットが働く
+                // float x = Random.Range(spawnArea.x + enemyRect.sizeDelta.x * enemyRect.localScale.x,
+                //     spawnArea.x + enemyRect.sizeDelta.x * enemyRect.localScale.x + spawnArea.width),
+                //     y = Random.Range(spawnArea.y + enemyRect.sizeDelta.y * enemyRect.localScale.y,
+                //     spawnArea.y + enemyRect.sizeDelta.y * enemyRect.localScale.y + spawnArea.height);
+            }
+
+                float x = Random.Range(spawnArea.x,spawnArea.x + spawnArea.width);
+                float y = Random.Range(spawnArea.y,spawnArea.y + spawnArea.height);
             //座標確認したい場合下を使ってね
-            //Debug.Log("\n生成するx座標：" + x + "  生成するy座標" + y);
+            Debug.Log("\n生成するx座標：" + x + "  生成するy座標" + y);
 
             //生成処理
             //第四引数にEnemyManagerの親Canvasを指定している
             //これはimageコンポーネントで描画されるオブジェクトは、
             //Canvasの子オブジェクトじゃないと描画されないから。
             var go = Instantiate(enemyPrefab, new Vector2(x, y), Quaternion.identity, transform);
+            //var go = Instantiate(enemyPrefab, new Vector2(12, 0), Quaternion.identity, transform);
             //エネミーを取得してエネミーの関数を呼び出し
             var enemy = go.GetComponent<EnemyScript>();
             enemy.SetManager(this);
