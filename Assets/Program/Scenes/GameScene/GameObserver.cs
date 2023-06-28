@@ -16,6 +16,6 @@ public class GameObserver : MonoBehaviour
     /*スコア表示*/
     void ShowScore()
     {
-        scoreNow.text = "SCORE:" + GlobalMember.getScore().ToString("D3");
+        scoreNow.text = "SCORE:" + ScoreManager.score.ToString("D3");
     }
 }

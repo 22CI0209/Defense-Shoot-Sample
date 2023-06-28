@@ -20,30 +20,18 @@ public class GlobalMember : MonoBehaviour
     /*初回起動*/
     static bool launched;
 
-    /*スコア*/
-    static int score;
-    static int[] highScore = new int[10];
-    
-    public static int getScore()
-    {
-      return score;
-    }
-
     /*ゲームの進行状況をリセット*/
     public static void ResetProgress()
     {
       UnityEngine.Application.targetFrameRate = 60;
-      score = 0;
+      ScoreManager.score = 0;
 
       /*初回起動時*/
       if(!launched)
       {
         RenameTitle_Win("2023年度 制作実習 防衛シューティングゲーム (制作者名)");
-        for(int i = 0; i < highScore.Length; ++i)
-        {
-          highScore[i] = 3 * i;
-        }
         launched = true;
+        PlayerPrefs.DeleteAll();
       }
     }
 
