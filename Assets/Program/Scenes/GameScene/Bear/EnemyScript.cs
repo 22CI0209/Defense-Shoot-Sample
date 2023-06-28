@@ -113,7 +113,7 @@ public class EnemyScript : MonoBehaviour
         //死亡するときの何らかの処理～
         Instantiate(effectPrefab, rect.position, Quaternion.identity, transform.parent);
         manager.EnemysList.Remove(this);
-        //ScoreManager.singleton.AddScore(1);
+        ScoreManager.score += 1;
         Destroy(gameObject);
     }
 
